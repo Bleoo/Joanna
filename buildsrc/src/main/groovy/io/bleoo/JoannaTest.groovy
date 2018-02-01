@@ -11,7 +11,7 @@ public class JoannaTest implements Plugin<Project> {
     void apply(Project project) {
         println 'Joanna plugin apply!'
         AppExtension android = project.extensions.getByType(AppExtension)
-        android.registerTransform(new MyTransform(project, android))
+//        android.registerTransform(new MyTransform(project, android))
 
         if (project.plugins.hasPlugin(AppPlugin)) {
             android.applicationVariants.all { ApplicationVariantImpl variant ->
