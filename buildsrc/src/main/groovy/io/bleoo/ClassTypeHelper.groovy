@@ -16,7 +16,6 @@ public class ClassTypeHelper {
     }
 
     public static ClassName getClassType(String clazz) {
-        println(clazz)
         ClassName className = classMap.get(clazz, null)
         if (className == null) {
             int index = clazz.lastIndexOf(".")
@@ -24,11 +23,13 @@ public class ClassTypeHelper {
                 return null
             }
             String packageName = clazz.substring(0, index)
-            println(packageName)
             String simpleName = clazz.substring(index + 1)
-            println(simpleName)
             className = ClassName.get(packageName, simpleName)
         }
         return className
+    }
+
+    public static ClassName getR(String packageName){
+        return ClassName.get(packageName, "R")
     }
 }

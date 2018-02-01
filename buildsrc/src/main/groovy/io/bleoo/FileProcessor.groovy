@@ -13,17 +13,16 @@ public class FileProcessor {
     public final static String PACKAGE_NAME = "io.github.bleoo.joanna"
     public final static String VIEW_BINDER_SUFFIX = "_ViewBinder"
 
-    static void createViewBinder(String xmlName, Map<String, String> viewMap, File outputDir) {
+    File outputDir
+    String packageName
+
+    public FileProcessor(File outputDir, String packageName){
+        this.outputDir = outputDir
+        this.packageName = packageName
+    }
+
+    public void createViewBinder(String xmlName, Map<String, String> viewMap) {
         String className = getClassNameByXmlName(xmlName)
-//        String content = """package io.github.bleoo.joanna;\n"""
-//        content += """import android.support.v7.app.AppCompatActivity;\n"""
-//        content += """import android.widget.TextView;\n"""
-//        content += """public class ${className} {\n"""
-//        content += """public static TextView tv_text;\n"""
-//        content += """    public static void bind(AppCompatActivity activity){\n"""
-//        content += """        tv_text = (TextView)activity.findViewById(R.id.tv_text);\n"""
-//        content += """    }\n"""
-//        content += """}"""
         MethodSpec.Builder constructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(ClassTypeHelper.getClassType("Activity"), "activity")
@@ -35,7 +34,7 @@ public class FileProcessor {
                         .addModifiers(Modifier.PUBLIC)
                         .build()
                 fieldList.add(fieldSpec)
-                constructor.addStatement(viewId + " = (" + clazz + ")activity.findViewById(R.id." + viewId + ")")
+                constructor.addStatement(viewId + " = (" + clazz + ')activity.findViewById($T.id.' + viewId + ")",  ClassTypeHelper.getR(packageName))
             }
         }
         TypeSpec typeSpec = TypeSpec.classBuilder(className)
@@ -48,7 +47,7 @@ public class FileProcessor {
         javaFile.writeTo(outputDir)
     }
 
-    private static String getClassNameByXmlName(String xmlName) {
+    private String getClassNameByXmlName(String xmlName) {
         return xmlName.substring(0, 1).toUpperCase() +
                 xmlName.substring(1, xmlName.indexOf(".")) +
                 VIEW_BINDER_SUFFIX

@@ -1,8 +1,10 @@
-package io.github.bleoo.joanna;
+package io.joanna.simple;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import io.github.bleoo.joanna.Activity_main_ViewBinder;
 
 public class MainActivity extends AppCompatActivity {
 
