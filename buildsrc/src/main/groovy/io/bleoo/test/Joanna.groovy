@@ -1,4 +1,4 @@
-package io.bleoo
+package io.bleoo.test
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
@@ -6,7 +6,7 @@ import com.android.build.gradle.internal.api.ApplicationVariantImpl
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public class JoannaTest implements Plugin<Project> {
+public class Joanna implements Plugin<Project> {
 
     void apply(Project project) {
         println 'Joanna plugin apply!'

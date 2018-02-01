@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.bleoo.JoannaTest'
+apply plugin: 'io.bleoo.test.Joanna'
 //apply plugin: 'io.bleoo.Joanna'
 
 android {
