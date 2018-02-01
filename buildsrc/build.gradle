@@ -1,0 +1,14 @@
+apply plugin: 'groovy'
+
+dependencies {
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile 'com.android.tools.build:gradle:3.0.0'
+    compile 'org.javassist:javassist:3.20.0-GA'
+    compile 'com.squareup:javapoet:1.9.0'
+}
+
+repositories {
+    google()
+    jcenter()
+}
