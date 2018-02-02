@@ -17,12 +17,18 @@ public class Joanna implements Plugin<Project> {
             android.applicationVariants.all { ApplicationVariantImpl variant ->
 
                 //创建一个task
-                def createTaskName = variant.variantData.scope.getTaskName("joanna", "Generate")
+                def createTaskName = variant.variantData.scope.getTaskName("generate", "ViewBinder")
                 def createTask = project.task(createTaskName)
+//                def createTask = project.tasks.create("generateViewBinder")
+//                def outputDir = new File(project.buildDir + "/generated/source/viewBinder")
+//                createTask.outputs.dir(outputDir)
+//                variant.registerJavaGeneratingTask(createTask, outputDir)
                 //设置task要执行的任务
+                File outputDir = variant.variantData.scope.buildConfigSourceOutputDir
                 createTask.doLast {
                     println 'Joanna plugin start!'
-                    ProjectProcessor processor= new ProjectProcessor(project, variant)
+
+                    ProjectProcessor processor= new ProjectProcessor(project, outputDir)
                     String manifestFilePath = project.projectDir.absolutePath + File.separator +
                             "src" + File.separator +
                             "main" + File.separator +
@@ -39,8 +45,8 @@ public class Joanna implements Plugin<Project> {
                 String generateBuildConfigTaskName = variant.variantData.scope.generateBuildConfigTask.name
                 def generateBuildConfigTask = project.tasks.getByName(generateBuildConfigTaskName)
                 if (generateBuildConfigTask) {
-                    createTask.dependsOn generateBuildConfigTask
-                    generateBuildConfigTask.finalizedBy createTask
+                    createTask.dependsOn(generateBuildConfigTask)
+                    generateBuildConfigTask.finalizedBy(createTask)
                 }
             }
         }

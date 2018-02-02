@@ -57,7 +57,7 @@ public class MyInject {
     public static void createClassFile(String path, AppExtension android) {
         pool.appendClassPath(path)
         pool.appendClassPath(android.bootClasspath[0].toString())
-        pool.importPackage("android.os.Bunle")
+        pool.importPackage("android.os.Bundle")
         File dir = new File(path)
         if(dir.isDirectory()){
             dir.eachFileRecurse {File file->

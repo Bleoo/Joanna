@@ -6,7 +6,11 @@ public class ClassTypeHelper {
 
     public final static ClassName Activity_Type = ClassName.get("android.app", "Activity")
     public final static ClassName Dialog_Type = ClassName.get("android.app", "Dialog")
+
     public final static ClassName View_Type = ClassName.get("android.view", "View")
+    public final static ClassName ViewGroup_Type = ClassName.get("android.view", "ViewGroup")
+    public final static ClassName ViewStub_Type = ClassName.get("android.view", "ViewStub")
+
     public final static ClassName TextView_Type = ClassName.get("android.widget", "TextView")
 
     static Map<String, ClassName> classMap
