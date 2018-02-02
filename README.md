@@ -1,16 +1,16 @@
 # Joanna
 
-该插件思想确立，但未完善，目标使用方式如下。
+该插件思想确立，目标使用方式如下。它能正常运行，但是还不能发布使用。
 
-The idea of the plug-in is established, but it is not perfect, and the use of the target is as follows.
+The idea of the plug-in is established, and the use of the target is as follows. It can run normally, but it can't be used.
 
-activity_main.xml   ->  Activity_main_ViewBinder.java
+> activity_main.xml --> Activity_main_ViewBinder.java
 
 不使用apt及注解的方式，在编译期，根据layout的xml生成viewBinder类
 
-Instead of using apt and annotations, the viewBinder class is generated in the compilation period based on the XML of the layout
+Not using APT and annotations, in the compilation period, generating viewBinder classes based on the XML of layout.
 
-## Usage
+## Usage(not yet)
 
 ```groovy
 apply plugin: 'io.bleoo.Joanna'

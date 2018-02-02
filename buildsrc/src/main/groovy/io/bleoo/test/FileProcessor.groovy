@@ -27,9 +27,9 @@ public class FileProcessor {
         ClassName RClass = ClassTypeHelper.getR(packageName)
         ArrayList<FieldSpec> fieldList = new HashMap<>()
         viewMap.each { String viewId, String clazz ->
-            ClassName classType = ClassTypeHelper.getClassType(clazz)
+            ClassName classType = ClassTypeHelper.getViewClassType(clazz)
             if (classType != null) {
-                FieldSpec fieldSpec = FieldSpec.builder(ClassTypeHelper.getClassType(clazz), viewId)
+                FieldSpec fieldSpec = FieldSpec.builder(ClassTypeHelper.getViewClassType(clazz), viewId)
                         .addModifiers(Modifier.PUBLIC)
                         .build()
                 fieldList.add(fieldSpec)
@@ -57,7 +57,7 @@ public class FileProcessor {
     private MethodSpec.Builder getConstructorBuilder(String targetClass) {
         MethodSpec.Builder constructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(ClassTypeHelper.getClassType(targetClass), targetClass.toLowerCase())
+                .addParameter(ClassTypeHelper.getTargetClassType(targetClass), targetClass.toLowerCase())
         return constructor
     }
 
