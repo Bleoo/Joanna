@@ -1,8 +1,8 @@
 # Joanna
 
-该插件思想确立，目标使用方式如下。它能正常运行，但是还不能发布使用。
+该插件思想确立，目标使用方式如下。它能正常运行，但是不够完美。
 
-The idea of the plug-in is established, and the use of the target is as follows. It can run normally, but it can't be used.
+The idea of the plug-in is established, and the use of the target is as follows. It can run normally, but not perfect enough.
 
 > activity_main.xml --> Activity_main_ViewBinder.java
 
@@ -10,15 +10,35 @@ The idea of the plug-in is established, and the use of the target is as follows.
 
 Not using APT and annotations, in the compilation period, generating viewBinder classes based on the XML of layout.
 
-## Usage(not yet)
+## Usage
+在需要使用该插件的module的build.gradle中添加:
+
+in the build.gradle of the module that needs to use this plug-in add:
 
 ```groovy
 apply plugin: 'io.bleoo.Joanna'
+```
 
-dependencies {
-    classpath 'io.bleoo:joannaPlugin:0.1' //添加依赖
+在根目录下的build.gradle下添加:
+
+In the build.gradle of the root directory add:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.github.Bleoo:Joanna:1.0' //添加依赖
+    }
 }
 ```
+
+你的layout下xml文件将会这样生成java类，并且使用它。
+
+Your layout xml file will generate a java class that you can use it like this.
+
+> activity_main.xml --> Activity_main_ViewBinder.java
 
 ```java
 import io.github.bleoo.joanna.Activity_main_ViewBinder;
@@ -32,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewBinder = new Activity_main_ViewBinder(this);
-        viewBinder.tv_text.setText("gradle changed me");
+        viewBinder.tv_text.setText("gradle initialize me");
     }
 }
 ```
