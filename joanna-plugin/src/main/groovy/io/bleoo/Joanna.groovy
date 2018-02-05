@@ -2,6 +2,7 @@ package io.bleoo
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.internal.api.ApplicationVariantImpl
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,7 +13,7 @@ public class Joanna implements Plugin<Project> {
         println 'Joanna plugin apply!'
         AppExtension android = project.extensions.getByType(AppExtension)
 
-        if (project.plugins.hasPlugin(AppPlugin)) {
+        if (project.plugins.hasPlugin(AppPlugin) || project.plugins.hasPlugin(LibraryPlugin)) {
             android.applicationVariants.all { ApplicationVariantImpl variant ->
 
                 //创建一个task
