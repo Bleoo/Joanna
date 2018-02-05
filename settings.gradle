@@ -1,1 +1,1 @@
-include ':app', ':joanna-plugin', ':buildsrc'
+include ':app', ':joanna-plugin', ':buildsrc', ':testlibrary'

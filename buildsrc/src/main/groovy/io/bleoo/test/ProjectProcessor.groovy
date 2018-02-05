@@ -1,6 +1,5 @@
 package io.bleoo.test
 
-import com.android.build.gradle.internal.api.ApplicationVariantImpl
 import groovy.util.slurpersupport.GPathResult
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree
@@ -38,7 +37,9 @@ public class ProjectProcessor {
                         viewId = viewId.substring(viewId.indexOf('/') + 1)
                         viewMap.put(viewId, view.name())
                     }
-                    fileProcessor.createViewBinder(file.name, viewMap)
+                    if (viewMap.size() > 0) {
+                        fileProcessor.createViewBinder(file.name, viewMap)
+                    }
                 }
             }
         }

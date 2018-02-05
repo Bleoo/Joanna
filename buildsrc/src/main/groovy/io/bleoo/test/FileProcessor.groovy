@@ -49,13 +49,13 @@ public class FileProcessor {
         }
 
         JavaFile javaFile = JavaFile.builder(PACKAGE_NAME, typeSpecBuilder.build())
+                .addFileComment('Generated code from Joanna. Do not modify!')
                 .build()
         javaFile.writeTo(outputDir)
     }
 
     private MethodSpec.Builder getConstructorBuilder(String targetClass) {
         MethodSpec.Builder constructor = MethodSpec.constructorBuilder()
-                .addComment('Generated code from Joanna. Do not modify!')
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(ClassTypeHelper.getTargetClassType(targetClass), targetClass.toLowerCase())
         return constructor

@@ -37,7 +37,9 @@ public class ProjectProcessor {
                         viewId = viewId.substring(viewId.indexOf('/') + 1)
                         viewMap.put(viewId, view.name())
                     }
-                    fileProcessor.createViewBinder(file.name, viewMap)
+                    if (viewMap.size() > 0) {
+                        fileProcessor.createViewBinder(file.name, viewMap)
+                    }
                 }
             }
         }
