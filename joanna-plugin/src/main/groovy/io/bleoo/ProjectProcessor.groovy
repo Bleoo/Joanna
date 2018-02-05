@@ -1,6 +1,5 @@
 package io.bleoo
 
-import com.android.build.gradle.internal.api.ApplicationVariantImpl
 import groovy.util.slurpersupport.GPathResult
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree
@@ -8,15 +7,13 @@ import org.gradle.api.file.FileTree
 public class ProjectProcessor {
 
     Project project
-    ApplicationVariantImpl variant
     File outputDir
     String packageName
 
-    public ProjectProcessor(Project project, ApplicationVariantImpl variant) {
+    public ProjectProcessor(Project project, File outputDir) {
         this.project = project
-        this.variant = variant
         //获取到BuildConfig类的路径
-        outputDir = variant.variantData.scope.buildConfigSourceOutputDir
+        this.outputDir = outputDir
     }
 
     public void processPackageName(String manifestFilePath) {

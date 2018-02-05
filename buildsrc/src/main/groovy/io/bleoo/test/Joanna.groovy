@@ -17,28 +17,31 @@ public class Joanna implements Plugin<Project> {
             android.applicationVariants.all { ApplicationVariantImpl variant ->
 
                 //创建一个task
-                def createTaskName = variant.variantData.scope.getTaskName("generate", "ViewBinder")
+                def createTaskName = variant.variantData.scope.getTaskName('generate', 'ViewBinder')
                 def createTask = project.task(createTaskName)
-//                def createTask = project.tasks.create("generateViewBinder")
-//                def outputDir = new File(project.buildDir + "/generated/source/viewBinder")
-//                createTask.outputs.dir(outputDir)
+                File outputDir = variant.variantData.scope.buildConfigSourceOutputDir
+//                def createTask = project.tasks.create('generateViewBinder')
+//                File outputDir = new File(project.buildDir.absolutePath
+//                        + File.separator + 'generated'
+//                        + File.separator + 'source'
+//                        + File.separator + 'viewBinder')
+//                createTask.outputs.dir(outputDir.absolutePath)
 //                variant.registerJavaGeneratingTask(createTask, outputDir)
                 //设置task要执行的任务
-                File outputDir = variant.variantData.scope.buildConfigSourceOutputDir
                 createTask.doLast {
                     println 'Joanna plugin start!'
 
-                    ProjectProcessor processor= new ProjectProcessor(project, outputDir)
+                    ProjectProcessor processor = new ProjectProcessor(project, outputDir)
                     String manifestFilePath = project.projectDir.absolutePath + File.separator +
-                            "src" + File.separator +
-                            "main" + File.separator +
-                            "AndroidManifest.xml"
+                            'src' + File.separator +
+                            'main' + File.separator +
+                            'AndroidManifest.xml'
                     processor.processPackageName(manifestFilePath)
                     String layoutDirPath = project.projectDir.absolutePath + File.separator +
-                            "src" + File.separator +
-                            "main" + File.separator +
-                            "res" + File.separator +
-                            "layout"
+                            'src' + File.separator +
+                            'main' + File.separator +
+                            'res' + File.separator +
+                            'layout'
                     processor.processLayoutXml(layoutDirPath)
                 }
                 //设置task依赖于生成BuildConfig的task，然后在生成BuildConfig后生成我们的类

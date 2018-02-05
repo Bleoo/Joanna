@@ -41,7 +41,6 @@ public class FileProcessor {
         }
 
         TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(className)
-                .addJavadoc('Generated code from Joanna. Do not modify!')
                 .addFields(fieldList)
                 .addModifiers(Modifier.FINAL, Modifier.PUBLIC)
 
@@ -56,6 +55,7 @@ public class FileProcessor {
 
     private MethodSpec.Builder getConstructorBuilder(String targetClass) {
         MethodSpec.Builder constructor = MethodSpec.constructorBuilder()
+                .addComment('Generated code from Joanna. Do not modify!')
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(ClassTypeHelper.getTargetClassType(targetClass), targetClass.toLowerCase())
         return constructor

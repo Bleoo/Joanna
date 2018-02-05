@@ -4,36 +4,44 @@ import com.squareup.javapoet.ClassName
 
 public class ClassTypeHelper {
 
-    public final static ClassName Activity_Type = ClassName.get("android.app", "Activity")
-    public final static ClassName Dialog_Type = ClassName.get("android.app", "Dialog")
-    public final static ClassName View_Type = ClassName.get("android.view", "View")
-    public final static ClassName TextView_Type = ClassName.get("android.widget", "TextView")
+    private static final String[] ANDROID_VIEW_PACKAGE_VIEWS = [
+            'View', 'ViewGroup', 'ViewStub', 'TextureView', 'SurfaceView'
+    ] as String[]
 
-    static Map<String, ClassName> classMap
-
-    static {
-        classMap = new HashMap<>()
-        classMap.put("Activity", Activity_Type)
-        classMap.put("Dialog", Dialog_Type)
-        classMap.put("View", View_Type)
-        classMap.put("TextView", TextView_Type)
+    public static ClassName getTargetClassType(String clazz) {
+        switch (clazz) {
+            case 'Activity':
+                return ClassName.get('android.app', 'Activity')
+                break
+            case 'Dialog':
+                return ClassName.get('android.app', 'Dialog')
+                break
+            case 'View':
+                return ClassName.get('android.view', 'View')
+                break
+            default:
+                return null
+        }
     }
 
-    public static ClassName getClassType(String clazz) {
-        ClassName className = classMap.get(clazz, null)
-        if (className == null) {
-            int index = clazz.lastIndexOf(".")
-            if(index < 0){
-                return null
-            }
+    public static ClassName getViewClassType(String clazz) {
+        int index = clazz.lastIndexOf('.')
+        if (index > 0) {
             String packageName = clazz.substring(0, index)
             String simpleName = clazz.substring(index + 1)
-            className = ClassName.get(packageName, simpleName)
+            return ClassName.get(packageName, simpleName)
+        } else {
+            if (clazz in ANDROID_VIEW_PACKAGE_VIEWS) {
+                return ClassName.get('android.view', clazz)
+            } else if (clazz == 'WebView') {
+                return ClassName.get('android.webkit', clazz)
+            } else {
+                return ClassName.get('android.widget', clazz)
+            }
         }
-        return className
     }
 
-    public static ClassName getR(String packageName){
-        return ClassName.get(packageName, "R")
+    public static ClassName getR(String packageName) {
+        return ClassName.get(packageName, 'R')
     }
 }

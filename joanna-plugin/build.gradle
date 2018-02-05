@@ -10,6 +10,8 @@ dependencies {
 
 apply plugin: 'maven-publish'
 
+group = 'io.bleoo.joannaPlugin'
+
 publishing {
     publications {
         task javadocJar(type: Jar, dependsOn: groovydoc) {

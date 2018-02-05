@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.bleoo.test.Joanna'
-//apply plugin: 'io.bleoo.Joanna'
+//apply plugin: 'io.bleoo.test.Joanna'
+apply plugin: 'io.bleoo.Joanna'
 
 android {
     compileSdkVersion 26
